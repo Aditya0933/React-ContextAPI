@@ -1,13 +1,18 @@
-// Profile.jsx
-import React from "react";
+// Profile.js
+import React, { useContext } from 'react';
+import AuthContext from "../ContextAPI/AuthContext";
 
-// Destructuring the user prop inside the component
-const Profile = ({ user }) => {
+const Profile = () => {
+  const { user, isAuthenticated } = useContext(AuthContext);
+
+  if (!isAuthenticated) {
+    return <h2>Please log in to view your profile.</h2>;
+  }
+
   return (
     <div>
-      <h2>Profile Component</h2>
-      <p><strong>Name:</strong> {user.name}</p>
-      <p><strong>Email:</strong> {user.email}</p>
+      <h2>Welcome, {user.name}!</h2>
+      <p>Email: {user.email}</p>
     </div>
   );
 };
